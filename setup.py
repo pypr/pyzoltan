@@ -289,7 +289,7 @@ def setup_package():
           version=info['__version__'],
           author='PySPH Developers',
           author_email='pysph-dev@googlegroups.com',
-          description='Wrapper for the Zotlan data management library',
+          description='Wrapper for the Zoltan data management library',
           long_description=open('README.rst').read(),
           url='http://github.com/pypr/pyzoltan',
           license="BSD",
