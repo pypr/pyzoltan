@@ -1,5 +1,6 @@
+cyarray
 Cython>=0.20
 setuptools>=6.0
 numpy
-mako
 pytest
+mpi4py>=1.2

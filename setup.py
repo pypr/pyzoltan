@@ -263,7 +263,7 @@ def setup_package():
 
     # The requirements.
     install_requires = [
-        'numpy', 'Cython>=0.20', 'setuptools>=6.0',
+        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0',
         'pytest>=3.0', 'mpi4py>=1.2'
     ]
     ext_modules = get_parallel_extensions()
