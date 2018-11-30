@@ -1,4 +1,4 @@
 include MANIFEST.in *.py *.rst *.yml *.sh *.txt
 recursive-exclude pyzoltan *.cpp
-recursive-include pyzoltan *.pxd *.h *.mako
+recursive-include pyzoltan *.pxd *.h
 recursive-include docs *.*

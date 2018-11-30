@@ -9,7 +9,7 @@ env:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -y libopenmpi-dev libtrilinos-zoltan-dev
+  - sudo apt-get install -y openmpi-bin libopenmpi-dev libtrilinos-zoltan-dev
 
 # command to install dependencies
 install:
