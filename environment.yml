@@ -1,7 +1,10 @@
 name: pyzoltan
+channels:
+  - conda-forge
 dependencies:
   - numpy
   - cython
   - mpi4py
+  - openmpi
   - pip:
       - cyarray
