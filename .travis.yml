@@ -1,0 +1,21 @@
+dist: xenial
+language: python
+python:
+  - "2.7"
+  - "3.6"
+
+env:
+  - USE_TRILINOS=1 ZOLTAN_INCLUDE=/usr/include/trilinos ZOLTAN_LIBRARY=/usr/lib/x86_64-linux-gnu
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y openmpi-bin libopenmpi-dev libtrilinos-zoltan-dev
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - python setup.py develop
+
+# command to run tests
+script:
+  - pytest -v pyzoltan

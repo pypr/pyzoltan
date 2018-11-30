@@ -262,10 +262,11 @@ def setup_package():
     exec(compile(open(module).read(), module, 'exec'), info)
 
     # The requirements.
-    install_requires = [
-        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0',
-        'pytest>=3.0', 'mpi4py>=1.2'
+    setup_requires = [
+        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0', 'mpi4py>=1.2'
     ]
+
+    install_requires = setup_requires + ['pytest>=3.0']
     ext_modules = get_parallel_extensions()
     if MODE != 'info' and _is_cythonize_default():
         # Cython >= 0.25 uses cythonize to compile the extensions. This
@@ -294,7 +295,7 @@ def setup_package():
           url='http://github.com/pypr/pyzoltan',
           license="BSD",
           keywords="Cython Zoltan Dynamic load balancing",
-          setup_requires=['pytest-runner'],
+          setup_requires=['pytest-runner'] + setup_requires,
           tests_require=['pytest'],
           packages=find_packages(),
           package_data={
