@@ -1,0 +1,7 @@
+name: pyzoltan
+dependencies:
+  - numpy
+  - cython
+  - mpi4py
+  - pip:
+      - cyarray
