@@ -295,7 +295,7 @@ def setup_package():
           url='http://github.com/pypr/pyzoltan',
           license="BSD",
           keywords="Cython Zoltan Dynamic load balancing",
-          setup_requires=['pytest-runner'],
+          setup_requires=['pytest-runner'] + setup_requires,
           tests_require=['pytest'],
           packages=find_packages(),
           package_data={
@@ -308,7 +308,6 @@ def setup_package():
           ext_modules=ext_modules,
           include_package_data=True,
           cmdclass=cmdclass,
-          setup_requires=setup_requires,
           install_requires=install_requires,
           zip_safe=False,
           platforms=['Linux', 'Mac OS-X', 'Unix', 'Windows'],
