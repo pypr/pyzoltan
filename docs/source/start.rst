@@ -78,6 +78,25 @@ be compiled and available.
         $ export ZOLTAN_LIBRARY=$INSTALL_PREFIX/lib
 
 
+Setting up on Ubuntu
+---------------------
+
+On Xenial and Bionic, Zoltan is already packaged as the
+``libtrilinos-zoltan-dev`` package. You can setup a suitable MPI like so::
+
+  $ sudo apt-get install openmpi-bin libopenmpi-dev libtrilinos-zoltan-dev
+
+Of course, you may use some other MPI implementation. With this you do not need
+to build your own Zoltan.  With this you may setup PyZoltan as follows::
+
+  $ export ZOLTAN_INCLUDE=/usr/include/trilinos
+  $ export ZOLTAN_LIBRARY=/usr/lib/x86_64-linux-gnu
+  $ export USE_TRILINOS=1
+
+After this you can build PyZoltan as usual using ``python setup.py install`` or
+``python setup.py develop``.
+
+
 Installing mpi4py and Zoltan on OS X
 --------------------------------------
 

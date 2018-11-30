@@ -1,10 +1,13 @@
 PyZoltan: a Python wrapper for the Zoltan library
 ==================================================
 
-|Travis Status|
+|Travis Status|  |Documentation Status|
 
 .. |Travis Status| image:: https://travis-ci.org/pypr/pyzoltan.svg?branch=master
     :target: https://travis-ci.org/pypr/pyzoltan
+.. |Documentation Status| image:: https://readthedocs.org/projects/pyzoltan/badge/?version=latest
+    :target: https://pyzoltan.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 PyZoltan is as the name suggests, is a Python wrapper for the Zoltan_
 data management library.
