@@ -107,7 +107,7 @@ def get_mpi_flags():
 def get_zoltan_args():
     """Returns zoltan_include_dirs, zoltan_library_dirs
     """
-    global HAVE_MPI
+    global HAVE_MPI, USE_ZOLTAN
     zoltan_include_dirs, zoltan_library_dirs = [], []
     if not HAVE_MPI:
         return zoltan_include_dirs, zoltan_library_dirs
@@ -124,6 +124,14 @@ def get_zoltan_args():
     if len(inc) == 0 or len(lib) == 0:
         inc = get_zoltan_directory('ZOLTAN_INCLUDE')
         lib = get_zoltan_directory('ZOLTAN_LIBRARY')
+
+    if not USE_ZOLTAN:
+        # Try with default in sys.prefix/{include,lib}, this is what is done
+        # by any conda installs of zoltan.
+        inc = os.path.join(sys.prefix, 'include')
+        lib = os.path.join(sys.prefix, 'lib')
+        if os.path.exists(os.path.join(inc, 'zoltan.h')):
+            USE_ZOLTAN = True
 
     if (not USE_ZOLTAN):
         print("*" * 80)
@@ -273,8 +281,9 @@ def setup_package():
         # requires the compile_time_env to be set explicitly to work.
         compile_env = {}
         include_path = set()
-        MPI4PY_V2 = False if mpi4py.__version__.startswith('1.') else True
-        compile_env.update({'MPI4PY_V2': MPI4PY_V2})
+        if HAVE_MPI:
+            MPI4PY_V2 = False if mpi4py.__version__.startswith('1.') else True
+            compile_env.update({'MPI4PY_V2': MPI4PY_V2})
 
         for mod in ext_modules:
             compile_env.update(mod.cython_compile_time_env or {})

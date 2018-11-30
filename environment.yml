@@ -1,10 +1,12 @@
 name: pyzoltan
 channels:
   - conda-forge
+  - erdc
 dependencies:
   - numpy
   - cython
   - mpi4py
   - openmpi
+  - zoltan
   - pip:
       - cyarray
