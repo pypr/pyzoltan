@@ -5,10 +5,11 @@ if MPI4PY_V2:
 else:
    from mpi4py.mpi_c cimport MPI_Comm
 
+from cyarray.carray cimport UIntArray, IntArray
+
 from pyzoltan.czoltan.czoltan_dd cimport *
 from pyzoltan.czoltan.czoltan_types cimport ZOLTAN_ID_TYPE, ZOLTAN_ID_PTR
 
-from carray cimport UIntArray, IntArray
 
 cdef class Zoltan_DD:
     # Pointer to the Zoltan DD

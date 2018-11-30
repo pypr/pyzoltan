@@ -39,6 +39,8 @@ try:
 except ImportError:
     ZOLTAN_UNSIGNED_INT=False
 
+from cyarray.carray import DoubleArray, IntArray, UIntArray
+
 # Python standard library imports
 from warnings import warn
 

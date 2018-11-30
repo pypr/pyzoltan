@@ -1,8 +1,8 @@
 """General imports for PyZoltan"""
 
 # CArrays
-import pyzoltan.core.carray as carray
-from pyzoltan.core.carray import UIntArray, IntArray, LongArray, \
+import cyarray.carray as carray
+from cyarray.carray import UIntArray, IntArray, LongArray, \
     DoubleArray
 
 # Main Zoltan load balancer

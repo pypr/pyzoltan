@@ -9,7 +9,7 @@ import sys
 import mpi4py.MPI as mpi
 comm = mpi.COMM_WORLD
 
-from pyzoltan.core.carray import UIntArray, DoubleArray
+from cyarray.api import UIntArray, DoubleArray
 from pyzoltan.core import zoltan
 
 MY_DIR = dirname(abspath(__file__))

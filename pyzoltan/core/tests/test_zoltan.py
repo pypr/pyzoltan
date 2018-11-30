@@ -3,7 +3,7 @@
 import unittest
 from pytest import mark, importorskip
 
-from pysph.tools import run_parallel_script
+from pyzoltan.tools import run_parallel_script
 
 path = run_parallel_script.get_directory(__file__)
 

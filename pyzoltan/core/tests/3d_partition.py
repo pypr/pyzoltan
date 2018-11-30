@@ -13,7 +13,7 @@ comm = mpi.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 
-from pyzoltan.core.carray import UIntArray, DoubleArray
+from cyarray.api import UIntArray, DoubleArray
 from pyzoltan.core import zoltan
 
 from numpy import random

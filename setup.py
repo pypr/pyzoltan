@@ -141,6 +141,11 @@ def get_zoltan_args():
         zoltan_cython_include = [os.path.abspath('./pyzoltan/czoltan')]
         zoltan_include_dirs += zoltan_cython_include
 
+    # Not sure we need this but doing so just to be safe.
+    import cyarray
+    cyarray_include_dirs = [os.path.abspath(os.path.dirname(cyarray.__file__))]
+    zoltan_include_dirs += cyarray_include_dirs
+
     return zoltan_include_dirs, zoltan_library_dirs
 
 
@@ -174,16 +179,9 @@ def get_parallel_extensions():
 
     zoltan_modules = [
         Extension(
-            name="pyzoltan.core.carray",
-            sources=["pyzoltan/core/carray.pyx"],
-            include_dirs=include_dirs,
-            extra_compile_args=extra_compile_args,
-        ),
-        Extension(
             name="pyzoltan.core.zoltan",
             sources=["pyzoltan/core/zoltan.pyx"],
             depends=get_deps(
-                "pyzoltan/core/carray",
                 "pyzoltan/czoltan/czoltan",
                 "pyzoltan/czoltan/czoltan_types",
             ),
@@ -265,7 +263,7 @@ def setup_package():
 
     # The requirements.
     install_requires = [
-        'numpy', 'mako', 'Cython>=0.20', 'setuptools>=6.0',
+        'numpy', 'Cython>=0.20', 'setuptools>=6.0',
         'pytest>=3.0', 'mpi4py>=1.2'
     ]
     ext_modules = get_parallel_extensions()
@@ -274,6 +272,9 @@ def setup_package():
         # requires the compile_time_env to be set explicitly to work.
         compile_env = {}
         include_path = set()
+        MPI4PY_V2 = False if mpi4py.__version__.startswith('1.') else True
+        compile_env.update({'MPI4PY_V2': MPI4PY_V2})
+
         for mod in ext_modules:
             compile_env.update(mod.cython_compile_time_env or {})
             include_path.update(mod.include_dirs)

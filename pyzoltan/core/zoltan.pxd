@@ -17,7 +17,7 @@ import numpy as np
 cimport numpy as np
 
 # Carrays
-from carray cimport UIntArray, IntArray, LongArray, DoubleArray
+from cyarray.carray cimport UIntArray, IntArray, LongArray, DoubleArray
 
 # Compatibility for older MPI versions and later
 # mpi4py releases (Ubuntu 14.04 is one such).
