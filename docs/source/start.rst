@@ -149,3 +149,30 @@ export any environment variables.
 
 
 .. _conda: https://conda.io
+
+
+Credits
+--------
+
+PyZoltan was largely implemented by Kunal Puri at the `Department of Aerospace
+Engineering, IIT Bombay <http://www.aero.iitb.ac.in>`_ with some improvements
+and additions by Prabhu. It was originally a separate project and then pulled
+into PySPH and then pulled out into a separate project due to its use outside of
+SPH and particle methods.
+
+
+Citing PyZoltan
+---------------
+
+You may use the following to cite PyZoltan:
+
+- Kunal Puri, Prabhu Ramachandran, Pushkar Godbole, "Load Balancing Strategies
+  for SPH", 2013 National Conference on Parallel Computing Technologies
+  (PARCOMPTECH), Bangalore, India, 21-23 February 2013. `URL
+  <http://ieeexplore.ieee.org/document/6621394/>`_
+
+
+Changelog
+-----------
+
+.. include:: ../../CHANGES.rst

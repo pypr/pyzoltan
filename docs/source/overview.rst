@@ -6,13 +6,11 @@ Introduction to PyZoltan
 
 .. py:currentmodule:: pyzoltan.core.zoltan
 
-PyZoltan is as the name suggests, is a Python wrapper for the Zoltan_
-data management library. Although it's primary purpose is a tool for
-dynamic load balancing for PySPH, the features are general enough to
-warrant a separate discussion. In :ref:`introduction`, we touched upon
-how to perform nearest neighbor queries in a distributed
-environment. In this document, we will introduce the PyZoltan
-interface in it's native non-SPH format.
+PyZoltan is as the name suggests, is a Python wrapper for the Zoltan_ data
+management library. Although it's primary purpose is a tool for dynamic load
+balancing for PySPH, the features are general enough to warrant a separate
+discussion. In this document, we will introduce the PyZoltan interface in it's
+native non-SPH format.
 
 In PyZoltan, we wrap the specific routines and objects that we wish to
 use. The following features of Zoltan are currently supported:
