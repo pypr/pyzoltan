@@ -294,8 +294,12 @@ def setup_package():
             include_path=list(include_path),
             compiler_directives=COMPILER_DIRECTIVES,
         )
+        if len(ext_modules) == 0:
+            raise RuntimeError(
+                'There are no extension modules, Nothing to do!'
+            )
 
-    setup(name='pyzoltan',
+    setup(name='PyZoltan',
           version=info['__version__'],
           author='PySPH Developers',
           author_email='pysph-dev@googlegroups.com',
