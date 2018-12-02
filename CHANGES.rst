@@ -1,3 +1,9 @@
+1.0.1
+~~~~~~
+
+* Release date: 1 December, 2018.
+* Minor release fixing setup.py requirements.
+
 1.0
 ~~~
 
