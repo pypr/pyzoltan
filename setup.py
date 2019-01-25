@@ -310,7 +310,7 @@ def setup_package():
           keywords="Cython Zoltan Dynamic load balancing",
           packages=find_packages(),
           package_data={
-              '': ['*.pxd', '*.mako', '*.rst']
+              '': ['*.pxd', '*.rst', '*.txt']
           },
           # exclude package data in installation.
           exclude_package_data={
