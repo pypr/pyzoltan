@@ -271,9 +271,10 @@ def setup_package():
 
     # The requirements.
     install_requires = [
-        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0', 'mpi4py>=1.2',
-        'pytest>=3.0'
+        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0', 'mpi4py>=1.2'
     ]
+    tests_require = ["pytest>=3.0"]
+    docs_require = ["sphinx"]
 
     ext_modules = get_parallel_extensions()
     if MODE != 'info' and _is_cythonize_default():
@@ -320,6 +321,11 @@ def setup_package():
           include_package_data=True,
           cmdclass=cmdclass,
           install_requires=install_requires,
+          extras_require={
+              "docs": docs_require,
+              "tests": tests_require,
+              "dev": docs_require + tests_require,
+          },
           zip_safe=False,
           platforms=['Linux', 'Mac OS-X', 'Unix', 'Windows'],
           classifiers=[c.strip() for c in """\
