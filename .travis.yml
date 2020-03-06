@@ -1,8 +1,9 @@
 dist: xenial
 language: python
 python:
-  - "2.7"
   - "3.6"
+  - "3.7"
+  - "3.8"
 
 env:
   - USE_TRILINOS=1 ZOLTAN_INCLUDE=/usr/include/trilinos ZOLTAN_LIBRARY=/usr/lib/x86_64-linux-gnu
