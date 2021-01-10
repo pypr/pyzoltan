@@ -35,13 +35,36 @@ These dependencies can be installed using pip::
 
   $ pip install -r requirements.txt
 
+.. note::
+
+   If you have a special and customized version of MPI that then you must be
+   careful and should perhaps install mpi4py from source instead of using pip
+   directly.
+
 Once this is installed one can install PyZoltan as follows::
 
-  $ pip install pyzoltan
+  $ pip install pyzoltan --no-build-isolation
 
-or via the usual ``setup.py`` method::
+or if you have the sources, via the usual ``setup.py`` method::
 
   $ python setup.py install # or develop
+
+Note that PyZoltan requires that the ZOLTAN library be built and be available.
+Instructions on how to do this are provided below for different platforms.
+
+You may also have a very customized environment, especially if you are using
+PyZoltan on a HPC cluster like say a Cray system. In this case, you will need
+to use custom flags to find and link to the MPI libraries. The easiest way to
+set this up is to use a configuration file which is documented below in
+:ref:`config`.
+
+.. note::
+
+   The ``--no-build-isolation`` argument to pip is **necessary** for without
+   it, pip will attempt to create an isolated environment and build a pyzoltan
+   wheel inside that isolated environment. This will mean that it will not see
+   mpi4py that you have built and installed. This could end up causing all
+   sorts of problems especially if you have a custom MPI library.
 
 
 Building and linking PyZoltan on OSX/Linux
@@ -64,7 +87,8 @@ After Zoltan is build, set the environment variable ``ZOLTAN`` to point to the
 
 Note that replace ``$INSTALL_PREFIX`` with the directory you specified above.
 After this, follow the instructions to build PySPH. The PyZoltan wrappers will
-be compiled and available.
+be compiled and available. If you do not wish to set environment variables
+each time, you may also want to look at :ref:`config`.
 
 .. note::
 
@@ -93,8 +117,9 @@ to build your own Zoltan.  With this you may setup PyZoltan as follows::
   $ export ZOLTAN_LIBRARY=/usr/lib/x86_64-linux-gnu
   $ export USE_TRILINOS=1
 
-After this you can build PyZoltan as usual using ``python setup.py install`` or
-``python setup.py develop``.
+If you do not wish to set environment variables, you may also want to look at
+:ref:`config`. After this you can build PyZoltan as usual using ``python
+setup.py install`` or ``python setup.py develop``.
 
 
 Installing mpi4py and Zoltan on OS X
@@ -132,6 +157,10 @@ You should be set now and should be able to build/install pyzoltan as::
   # or
   $ python setup.py develop
 
+If you do not wish to set environment variables, you may also want to look at
+:ref:`config`.
+
+
 .. _Homebrew: http://brew.sh/
 
 
@@ -149,6 +178,46 @@ export any environment variables.
 
 
 .. _conda: https://conda.io
+
+
+.. _config:
+
+Using the configuration file
+-----------------------------
+
+Instead of setting environment variables and build options on the shell you
+can have them setup using a simple configuration file. The file is located in
+``~/.compyle/config.py`` (we use the same file for Compyle_ and PySPH_). Here
+``~`` is your home directory which on Linux is ``/home/username``, on MacOS
+``/Users/username`` and on Windows the location is likely ``\Users\username``.
+This file is executed and certain options may be set there.
+
+For example if you wish to set the appropriate C and C++ compiler (icc, Cray,
+or PGI), you may set the ``CC`` and ``CXX`` environment variables. You could
+do this in the ``~/.compyle/config.py``::
+
+  import os
+
+  os.environ['CC'] = 'cc'
+  os.environ['CXX'] = 'CC'
+
+The MPI and ZOLTAN specific options are::
+
+  MPI_CFLAGS = ['...']  # must be a list.
+  MPI_LINK = ['...']
+
+  # Zoltan options
+  USE_TRILINOS = 1  # When set to anything, use "-ltrilinos_zoltan".
+  ZOLTAN = '/path/to_zoltan'  # looks inside this for $ZOLTAN/include/, lib/
+
+  # Not needed if using ZOLTAN
+  ZOLTAN_INCLUDE = 'path/include'  # path to zoltan.h
+  ZOLTAN_LIBRARY = 'path/lib'  # path to libzoltan.a
+
+
+
+.. _Compyle: https://compyle.readthedocs.io
+.. _PySPH: https://pysph.readthedocs.io
 
 
 Credits
