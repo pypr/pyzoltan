@@ -1,6 +1,61 @@
+'''Setup script for PyZoltan.
+
+You can use some environment variables to control the build. Setting CC/CXX
+will let you choose a custom compiler (these can also be set in the config file
+discussed below). You can also export ZOLTAN or ZOLTAN_INCLUDE/ZOLTAN_LIBRARY.
+
+These are more configuration file options that trump everything. The file is in
+~/.compyle/config.py.  The options are:
+
+# MPI options: handy on clusters like a Cray.
+MPI_CFLAGS = ['...']  # must be a list.
+MPI_LINK = ['...']
+
+# Zoltan options
+USE_TRILINOS = 1  # When set to anything, use "-ltrilinos_zoltan".
+ZOLTAN = '/path/to_zoltan'  # looks inside this for $ZOLTAN/include/, lib/
+
+# Not needed if using ZOLTAN
+ZOLTAN_INCLUDE = 'path/include'  # path to zoltan.h
+ZOLTAN_LIBRARY = 'path/lib'  # path to libzoltan.a
+
+'''
+
 import os
-import sys
 from subprocess import check_output
+import sys
+
+
+# This is taken from compyle.ext_module.
+def get_config_file_opts():
+    '''A global configuration file is used to configure build options
+    for compyle and other packages.  This is located in:
+
+    ~/.compyle/config.py
+
+    The file can contain arbitrary Python that is exec'd. The variables defined
+    here specify the compile and link args. For example, one may set:
+
+    OMP_CFLAGS = ['-fopenmp']
+    OMP_LINK = ['-fopenmp']
+
+    Will use these instead of the defaults that are automatically determined.
+    These must be lists.
+
+    '''
+    fname = os.path.expanduser(os.path.join('~', '.compyle', 'config.py'))
+    opts = {}
+    if os.path.exists(fname):
+        print('Reading configuration options from %s.' % fname)
+        with open(fname) as fp:
+            exec(compile(fp.read(), fname, 'exec'), opts)
+        opts.pop('__builtins__', None)
+    return opts
+
+
+# NOTE: the configuration options in the file trump everything else!
+# These are options from the .compyle/config.py
+CONFIG_OPTS = get_config_file_opts()
 
 
 if len(os.environ.get('COVERAGE', '')) > 0:
@@ -21,6 +76,7 @@ if len(sys.argv) >= 2 and \
     MODE = 'info'
 
 HAVE_MPI = True
+USE_ZOLTAN = True
 try:
     import mpi4py
 except ImportError:
@@ -49,6 +105,9 @@ def get_deps(*args):
 
 def get_zoltan_directory(varname):
     global USE_ZOLTAN
+    if varname in CONFIG_OPTS:
+        return os.path.expanduser(CONFIG_OPTS[varname])
+
     d = os.environ.get(varname, '')
     if len(d) == 0:
         USE_ZOLTAN = False
@@ -73,33 +132,42 @@ def get_mpi_flags():
     mpi_link_args = []
     if not HAVE_MPI:
         return mpi_inc_dirs, mpi_compile_args, mpi_link_args
-    try:
-        mpic = 'mpic++'
-        if compiler == 'intel':
-            link_args = check_output(
-                [mpic, '-cc=icc', '-link_info'], universal_newlines=True
-            ).strip()
-            link_args = link_args[3:]
-            compile_args = check_output(
-                [mpic, '-cc=icc', '-compile_info'], universal_newlines=True
-            ).strip()
-            compile_args = compile_args[3:]
-        else:
-            link_args = check_output(
-                [mpic, '--showme:link'], universal_newlines=True
-            ).strip()
-            compile_args = check_output(
-                [mpic, '--showme:compile'], universal_newlines=True
-            ).strip()
-    except:  # noqa: E722
-        print('-' * 80)
-        print("Unable to run mpic++ correctly, skipping parallel build")
-        print('-' * 80)
-        HAVE_MPI = False
-    else:
-        mpi_link_args.extend(link_args.split())
-        mpi_compile_args.extend(compile_args.split())
+    elif 'MPI_CFLAGS' in CONFIG_OPTS:
+        mpi_compile_args = CONFIG_OPTS['MPI_CFLAGS']
+        mpi_link_args = CONFIG_OPTS['MPI_LINK']
         mpi_inc_dirs.append(mpi4py.get_include())
+    else:
+        try:
+            mpic = 'mpic++'
+            if compiler == 'intel':
+                link_args = check_output(
+                    [mpic, '-cc=icc', '-link_info'],
+                    universal_newlines=True
+                ).strip()
+                link_args = link_args[3:]
+                compile_args = check_output(
+                    [mpic, '-cc=icc', '-compile_info'],
+                    universal_newlines=True
+                ).strip()
+                compile_args = compile_args[3:]
+            else:
+                link_args = check_output(
+                    [mpic, '--showme:link'],
+                    universal_newlines=True
+                ).strip()
+                compile_args = check_output(
+                    [mpic, '--showme:compile'],
+                    universal_newlines=True
+                ).strip()
+        except:  # noqa: E722
+            print('-' * 80)
+            print("Unable to run mpic++ correctly, skipping parallel build")
+            print('-' * 80)
+            HAVE_MPI = False
+        else:
+            mpi_link_args.extend(link_args.split())
+            mpi_compile_args.extend(compile_args.split())
+            mpi_inc_dirs.append(mpi4py.get_include())
 
     return mpi_inc_dirs, mpi_compile_args, mpi_link_args
 
@@ -182,7 +250,9 @@ def get_parallel_extensions():
     cython_compile_time_env = {'MPI4PY_V2': MPI4PY_V2}
 
     zoltan_lib = 'zoltan'
-    if os.environ.get('USE_TRILINOS', None) is not None:
+    if 'USE_TRILINOS' in CONFIG_OPTS:
+        zoltan_lib = 'trilinos_zoltan'
+    elif os.environ.get('USE_TRILINOS', None) is not None:
         zoltan_lib = 'trilinos_zoltan'
 
     zoltan_modules = [
