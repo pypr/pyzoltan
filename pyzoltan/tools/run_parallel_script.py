@@ -14,7 +14,8 @@ def kill_process(process):
     process.kill()
 
 
-def run(filename, args=None, nprocs=2, timeout=30.0, path=None):
+def run(filename, args=None, nprocs=2, timeout=30.0, path=None,
+        mpi_extra=None):
     """Run a python script with MPI or in serial (if nprocs=1).  Kill process
     if it takes longer than the specified timeout.
 
@@ -27,12 +28,14 @@ def run(filename, args=None, nprocs=2, timeout=30.0, path=None):
         else raise a RuntimeError exception.
     path - the path under which the script is located
         Defaults to the location of this file (__file__), not curdir.
+    mpi_extra: List of additional arguments to mpiexec.
 
     """
     if args is None:
         args = []
     file_path = abspath(join(path, filename))
-    cmd = [sys.executable, file_path] + args
+    extra = ['--oversubscribe'] if mpi_extra is None else mpi_extra
+    cmd = extra + [sys.executable, file_path] + args
     if nprocs > 1:
         cmd = ['mpiexec', '-n', str(nprocs)] + cmd
 
