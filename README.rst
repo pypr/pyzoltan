@@ -1,10 +1,10 @@
 PyZoltan: a Python wrapper for the Zoltan library
 ==================================================
 
-|Travis Status|  |Documentation Status|
+|CI Status|  |Documentation Status|
 
-.. |Travis Status| image:: https://travis-ci.org/pypr/pyzoltan.svg?branch=master
-    :target: https://travis-ci.org/pypr/pyzoltan
+.. |CI Status| image:: https://github.com/pypr/pyzoltan/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/pypr/pyzoltan/actions/workflows/tests.yml
 .. |Documentation Status| image:: https://readthedocs.org/projects/pyzoltan/badge/?version=latest
     :target: https://pyzoltan.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
