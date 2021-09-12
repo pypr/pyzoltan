@@ -820,7 +820,7 @@ cdef class ZoltanGeometricPartitioner(PyZoltan):
             self._cdata.use_weights = False
 
     def _set_default(self):
-        """Resonable defaults?"""
+        """Reasonable defaults?"""
         PyZoltan._set_default(self)
 
         self.Zoltan_Set_Param("LB_METHOD", self.lb_method)

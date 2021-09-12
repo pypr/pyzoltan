@@ -20,7 +20,7 @@ cdef class Zoltan_DD:
             MPI communicator ( COMM_WORLD )
 
         All processes must instantiate a copy of the Zoltan DD. A
-        pointer to the ZDD is created and stored for furhter
+        pointer to the ZDD is created and stored for further
         calls. Upon destruction, Zoltan_Destroy is called to get rid
         of the allocated ZDD
 
