@@ -1,9 +1,10 @@
 #!/bin/sh
 
 ZOLTAN_DIR=$1
+ZOLTAN_VERSION="v3.901"
 BUILD_DIR="/tmp"
 
-URL="http://www.cs.sandia.gov/~kddevin/Zoltan_Distributions/zoltan_distrib_v3.83.tar.gz"
+URL="https://github.com/sandialabs/Zoltan"
 
 Check()
 {
@@ -25,19 +26,13 @@ Check()
 Download()
 {
     FNAME=`basename $URL`
-    if [ -x "/usr/bin/curl" ] ; then
-        curl -o $BUILD_DIR/$FNAME $URL
-    else
-        wget -q -O $BUILD_DIR/$FNAME $URL
-    fi
+    git clone --depth=1 --branch $ZOLTAN_VERSION $URL $BUILD_DIR/$FNAME
 }
-
 
 Build()
 {
-    cd $BUILD_DIR
-    tar xzf zoltan_distrib*.tar.gz
-    cd Zoltan_v3.83
+    FNAME=`basename $URL`
+    cd $BUILD_DIR/$FNAME
     mkdir build
     cd build
     ../configure --with-cflags=-fPIC --enable-mpi --prefix=$ZOLTAN_DIR
