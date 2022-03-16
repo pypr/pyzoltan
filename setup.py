@@ -151,7 +151,7 @@ def get_mpi_flags():
                     universal_newlines=True
                 ).strip()
                 compile_args = compile_args[3:]
-            elif compiler == 'mpich':    
+            elif compiler == 'mpich':
                 link_args = check_output(
                     [mpic, '-link-info'],
                     universal_newlines=True
