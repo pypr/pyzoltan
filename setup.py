@@ -83,6 +83,7 @@ except ImportError:
     HAVE_MPI = False
 
 compiler = 'gcc'
+# compiler = 'mpich'
 # compiler = 'intel'
 if compiler == 'intel':
     extra_compile_args = ['-O3']
@@ -150,6 +151,17 @@ def get_mpi_flags():
                     universal_newlines=True
                 ).strip()
                 compile_args = compile_args[3:]
+            elif compiler == 'mpich':    
+                link_args = check_output(
+                    [mpic, '-link-info'],
+                    universal_newlines=True
+                ).strip()
+                link_args = " ".join(link_args.split()[1:])
+                compile_args = check_output(
+                    [mpic, '-compile_info'],
+                    universal_newlines=True
+                ).strip()
+                compile_args = " ".join(compile_args.split()[1:])
             else:
                 link_args = check_output(
                     [mpic, '--showme:link'],
