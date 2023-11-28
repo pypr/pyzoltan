@@ -1,5 +1,5 @@
 """Example for the Zoltan Distributed data directory"""
-from zoltan cimport _check_error
+from pyzoltan.core.zoltan cimport _check_error
 
 cdef class Zoltan_DD:
     """A Zoltan Distributed data directory is used as a parallel hash map.

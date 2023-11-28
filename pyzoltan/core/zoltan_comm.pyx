@@ -22,7 +22,7 @@ import numpy as np
 cimport numpy as np
 
 # Zoltan error checking
-from zoltan cimport _check_error
+from pyzoltan.core.zoltan cimport _check_error
 
 cdef class ZComm:
     """Wrapper for simplified unstructured point-to-point communication
