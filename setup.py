@@ -341,7 +341,7 @@ def setup_package():
 
     # The requirements.
     install_requires = [
-        'cyarray', 'numpy', 'Cython>=0.20', 'setuptools>=6.0', 'mpi4py>=1.2'
+        'cyarray', 'numpy', 'Cython<3.0', 'setuptools>=6.0', 'mpi4py>=1.2'
     ]
     tests_require = ["pytest>=3.0"]
     docs_require = ["sphinx"]
