@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Definitions for the Zoltan wrapper
 
 This module defines the main wrapper for the Zoltan library. Users can

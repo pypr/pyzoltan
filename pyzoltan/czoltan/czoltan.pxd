@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Cython Wrapper for Zoltan. """
 
 if MPI4PY_V2:

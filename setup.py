@@ -269,7 +269,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
 
@@ -287,7 +286,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
 
@@ -304,7 +302,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
     ]

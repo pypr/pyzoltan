@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 cimport mpi4py.MPI as mpi
 if MPI4PY_V2:
    from mpi4py cimport libmpi as mpic

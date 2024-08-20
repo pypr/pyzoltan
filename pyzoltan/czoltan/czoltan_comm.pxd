@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Cython wrapper for the Zoltan unstructured communication package"""
 
 if MPI4PY_V2:

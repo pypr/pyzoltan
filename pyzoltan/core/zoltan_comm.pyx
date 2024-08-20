@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Wrapper for the Zoltan Unstructured Communication Package
 
 The Unstructured Communication utilities simplifies some common
