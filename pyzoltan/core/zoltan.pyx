@@ -48,7 +48,7 @@ from cyarray.carray import DoubleArray, IntArray, UIntArray
 from warnings import warn
 
 # Local imports
-import zoltan_utils
+from . import zoltan_utils
 
 def get_zoltan_id_type_max():
     if ZOLTAN_UNSIGNED_INT:
