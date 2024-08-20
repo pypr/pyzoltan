@@ -102,7 +102,7 @@ cdef int get_number_of_objects(void* data, int* ierr):
 
 cdef void get_obj_list(void* data, int sizeGID, int sizeLID,
                        ZOLTAN_ID_PTR globalID, ZOLTAN_ID_PTR localID,
-                       int wgt_dim, float* obj_wts, int* ierr):
+                       int wgt_dim, float* obj_wts, int* ierr) noexcept:
     """Return the local and global ids of the objects.
 
     Methods: RCB, RIB, HSFC
@@ -133,7 +133,7 @@ cdef int get_num_geom(void* data, int* ierr):
 
 cdef void get_geometry_list(void* data, int sizeGID, int sizeLID, int num_obj,
                             ZOLTAN_ID_PTR globalID, ZOLTAN_ID_PTR localID,
-                            int num_dim, double* geom_vec, int* ierr):
+                            int num_dim, double* geom_vec, int* ierr) noexcept:
     """Return the coordinate locations for Zoltan.
 
     Methods: RCB, RIB, HSFC
