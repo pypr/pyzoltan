@@ -337,9 +337,6 @@ def setup_package():
     exec(compile(open(module).read(), module, 'exec'), info)
 
     # The requirements.
-    install_requires = [
-        'cyarray', 'numpy', 'Cython', 'setuptools>=6.0', 'mpi4py>=1.2,<4.0'
-    ]
     tests_require = ["pytest>=3.0"]
     docs_require = ["sphinx"]
 
@@ -388,7 +385,6 @@ def setup_package():
           ext_modules=ext_modules,
           include_package_data=True,
           cmdclass=cmdclass,
-          install_requires=install_requires,
           extras_require={
               "docs": docs_require,
               "tests": tests_require,
