@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Wrapper for the Zoltan Distributed Directory and routines"""
 cimport mpi4py.MPI as mpi
 if MPI4PY_V2:

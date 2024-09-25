@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Definitions for the Zoltan wrapper
 
 This module defines the main wrapper for the Zoltan library. Users can
@@ -45,7 +48,7 @@ from cyarray.carray import DoubleArray, IntArray, UIntArray
 from warnings import warn
 
 # Local imports
-import zoltan_utils
+from . import zoltan_utils
 
 def get_zoltan_id_type_max():
     if ZOLTAN_UNSIGNED_INT:
@@ -102,7 +105,7 @@ cdef int get_number_of_objects(void* data, int* ierr):
 
 cdef void get_obj_list(void* data, int sizeGID, int sizeLID,
                        ZOLTAN_ID_PTR globalID, ZOLTAN_ID_PTR localID,
-                       int wgt_dim, float* obj_wts, int* ierr):
+                       int wgt_dim, float* obj_wts, int* ierr) noexcept:
     """Return the local and global ids of the objects.
 
     Methods: RCB, RIB, HSFC
@@ -133,7 +136,7 @@ cdef int get_num_geom(void* data, int* ierr):
 
 cdef void get_geometry_list(void* data, int sizeGID, int sizeLID, int num_obj,
                             ZOLTAN_ID_PTR globalID, ZOLTAN_ID_PTR localID,
-                            int num_dim, double* geom_vec, int* ierr):
+                            int num_dim, double* geom_vec, int* ierr) noexcept:
     """Return the coordinate locations for Zoltan.
 
     Methods: RCB, RIB, HSFC

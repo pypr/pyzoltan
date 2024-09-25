@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 cdef extern from "Zoltan_config.h":
 
     # package string

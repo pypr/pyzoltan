@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Example for the Zoltan Distributed data directory"""
 from pyzoltan.core.zoltan cimport _check_error
 

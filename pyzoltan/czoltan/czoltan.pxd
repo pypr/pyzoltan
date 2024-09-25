@@ -1,3 +1,6 @@
+# cython: language_level=3, embedsignature=True
+# distutils: language=c++
+
 """Cython Wrapper for Zoltan. """
 
 if MPI4PY_V2:
@@ -152,7 +155,7 @@ cdef extern from "zoltan.h":
     ctypedef int ZOLTAN_NUM_OBJ_FN(
         void *data,
         int *ierr
-        )
+        ) except? -1
 
     extern int Zoltan_Set_Num_Obj_Fn(
         Zoltan_Struct *zz, ZOLTAN_NUM_OBJ_FN *fn_ptr, void *data_ptr)
@@ -217,7 +220,7 @@ cdef extern from "zoltan.h":
     ctypedef int ZOLTAN_NUM_GEOM_FN(
         void *data,
         int *ierr
-        )
+        )  except? -1
 
     extern int Zoltan_Set_Num_Geom_Fn(
         Zoltan_Struct *zz,

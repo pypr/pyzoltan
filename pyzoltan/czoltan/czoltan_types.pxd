@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 cdef extern from "zoltan_types.h":
 
     # basic type used by all of Zoltan

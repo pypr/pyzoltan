@@ -1,6 +1,6 @@
 cyarray
-Cython<3.0
+Cython
 setuptools>=6.0
 numpy
 pytest
-mpi4py>=1.2
+mpi4py>=1.2, <4.0

@@ -269,7 +269,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
 
@@ -287,7 +286,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
 
@@ -304,7 +302,6 @@ def get_parallel_extensions():
             extra_link_args=mpi_link_args,
             extra_compile_args=mpi_compile_args + extra_compile_args,
             cython_compile_time_env=cython_compile_time_env,
-            language="c++",
             define_macros=MACROS,
         ),
     ]
@@ -340,9 +337,6 @@ def setup_package():
     exec(compile(open(module).read(), module, 'exec'), info)
 
     # The requirements.
-    install_requires = [
-        'cyarray', 'numpy', 'Cython<3.0', 'setuptools>=6.0', 'mpi4py>=1.2'
-    ]
     tests_require = ["pytest>=3.0"]
     docs_require = ["sphinx"]
 
@@ -391,7 +385,6 @@ def setup_package():
           ext_modules=ext_modules,
           include_package_data=True,
           cmdclass=cmdclass,
-          install_requires=install_requires,
           extras_require={
               "docs": docs_require,
               "tests": tests_require,
