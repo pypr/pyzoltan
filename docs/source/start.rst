@@ -171,7 +171,7 @@ With conda_, on some platforms, it is possible to just use pre-built Zoltan_
 libraries.
 
 The pyzoltan repository has an `environment.yml
-<https://github.com/pypr/pyzoltan/blob/master/environment.yml>`_ file that shows
+<https://github.com/pypr/pyzoltan/blob/main/environment.yml>`_ file that shows
 how this can be done. The ``setup.py`` script is configured so if you have
 zoltan installed with the erdc channel's zoltan package, you don't need to
 export any environment variables.
