@@ -383,7 +383,7 @@ def setup_package():
           description='Wrapper for the Zoltan data management library',
           long_description=open('README.rst').read(),
           url='http://github.com/pypr/pyzoltan',
-          license="BSD",
+          license="BSD-3-Clause",
           keywords="Cython Zoltan Dynamic load balancing",
           packages=find_packages(),
           package_data={
@@ -409,7 +409,6 @@ def setup_package():
             Environment :: Console
             Intended Audience :: Developers
             Intended Audience :: Science/Research
-            License :: OSI Approved :: BSD License
             Natural Language :: English
             Operating System :: MacOS :: MacOS X
             Operating System :: Microsoft :: Windows
