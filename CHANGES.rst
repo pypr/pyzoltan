@@ -1,3 +1,9 @@
+1.1.1
+~~~~~~
+
+* Release date: 18 June, 2025.
+* Fixes bug with broken source distribution.
+
 1.1
 ~~~~
 
